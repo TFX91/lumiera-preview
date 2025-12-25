@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<title>LUMIÈRA NOIR | Prvá futuristická pâtisserie na Slovensku</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LUMIÈRA NOIR – prvé futuristické koláče na Slovensku. Luxusné dezerty s neonovým a UV efektom pre výnimočné eventy.">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#07070a;
+    --gold:#c9b46d;
+    --uv-accent:#b36bff;
+    --text:#f2f2f2;
+}
+*{box-sizing:border-box;}
+body{
+    margin:0;
+    background: linear-gradient(to bottom, #1b0033 0%, #05000a 100%);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    letter-spacing:.2px;
+    font-size:15px;
+    overflow-x:hidden;
+}
+h1,h2,h3{
+    font-family:'Playfair Display',serif;
+    letter-spacing:.5px;
+    font-weight:600;
+}
+h1{font-size:3rem}
+h2{font-size:2rem}
+.gold{color:var(--gold);}
+nav{
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(201,180,109,.35);
+}
+.navbar-brand{font-size:1.1rem;letter-spacing:2px;color:var(--gold);}
+.nav-link{
+    font-size:.85rem;
+    opacity:.85;
+    color:var(--gold);
+    position: relative;
+    transition: color .35s, text-shadow .35s;
+}
+.nav-link::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-3px;
+    width:0%;
+    height:2px;
+    background: linear-gradient(90deg, #b36bff, #ff4fd8);
+    transition: width .35s ease;
+    border-radius:1px;
+}
+.nav-link:hover{
+    color:#b36bff;
+    text-shadow:0 0 8px #b36bff,0 0 12px #ff4fd8;
+}
+.nav-link:hover::after{
+    width:100%;
+}
+.hero{
+    min-height:85vh;
+    display:flex;
+    align-items:center;
+    text-align:center;
+    position:relative;
+}
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to bottom,rgba(0,0,0,.15),#07070a 95%);
+}
+.hero-content{position:relative;z-index:2;max-width:760px;margin:auto;}
+.hero p{opacity:.8;}
+.lux-btn{
+    background:transparent;
+    border:1px solid var(--uv-accent);
+    color:var(--uv-accent);
+    padding:10px 34px;
+    border-radius:40px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:.75rem;
+    transition: background .35s, color .35s, box-shadow .35s, transform .35s;
+}
+.lux-btn:hover{
+    background:var(--uv-accent);
+    color:#000;
+    transform: scale(1.05);
+    box-shadow:0 0 25px var(--uv-accent),0 0 50px var(--uv-accent);
+}
+.glass{
+    background:rgba(255,255,255,.035);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(201,180,109,.18);
+    border-radius:20px;
+    transition: transform .35s, box-shadow .35s, border-color .35s;
+}
+.glass:hover{
+    transform:translateY(-6px);
+    box-shadow:0 0 15px var(--uv-accent),0 0 35px var(--uv-accent);
+    border-color:var(--uv-accent);
+}
+section{padding:80px 0;}
+.product{
+    transition:.35s;
+    text-align:center;
+}
+.product h4{font-size:1rem;margin-bottom:6px;}
+.product p{font-size:.8rem;opacity:.75;}
+.product strong{font-size:.9rem;}
+.product:hover{
+    transform:translateY(-6px);
+    box-shadow:0 0 20px var(--uv-accent),0 0 35px var(--uv-accent);
+}
+footer{
+    background:#050507;
+    border-top:1px solid rgba(201,180,109,.35);
+    font-size:.75rem;
+    opacity:.8;
+}
+canvas#galaxy{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    opacity:.35;
+}
+.cityscape{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:220px;
+    background:url('https://i.ibb.co/ZYW3VTp/cityscape.png') bottom center/cover no-repeat;
+    z-index:-1;
+    opacity:0.15;
+}
+.galaxy{
+    position: fixed;
+    inset: 0;
+    background: url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/img/demo-bg.jpg') center/cover no-repeat;
+    opacity: 0.15;
+    animation: slowMove 60s linear infinite;
+    z-index:-2;
+}
+@keyframes slowMove{
+    from{transform:scale(1) translateY(0);}
+    to{transform:scale(1.2) translateY(-50px);}
+}
+.hero h1{
+    font-size:clamp(3rem,8vw,6rem);
+    letter-spacing:0.3em;
+    color:var(--uv-accent);
+}
+.hero p{
+    max-width:720px;
+    margin:1rem auto;
+    font-size:1.25rem;
+    color:#c1b3ff;
+    white-space: nowrap;
+}
+</style>
+</head>
+<body>
+<div class="galaxy"></div>
+<div class="cityscape"></div>
+<canvas id="galaxy"></canvas>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">LUMIÈRA NOIR</a>
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Domov</a></li>
+                <li class="nav-item"><a class="nav-link" href="vision.html">Vízia</a></li>
+                <li class="nav-item"><a class="nav-link" href="collection.html">Kolekcia</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+    <div class="container hero-content">
+        <h1 class="display-2">LUMIÈRA NOIR</h1>
+        <p class="lead mt-4">Keď chuť sa stretáva so svetlom – luxus, ktorý žiari, očarí zmysly a prekonáva očakávania.</p>
+        <a href="#collection" class="lux-btn mt-4 d-inline-block">Objaviť kolekciu</a>
+    </div>
+</section>
+
+<!-- VISION -->
+<section id="vision" class="py-5">
+    <div class="container glass p-5 text-center">
+        <h2 class="mb-4" style="color:var(--uv-accent)">Filozofia značky</h2>
+        <p>LUMIÈRA NOIR predstavuje spojenie remesla, precíznosti a futuristickej estetiky. Každý dezert je navrhnutý ako luxusný objekt – minimalistický, čistý a výnimočný.</p>
+    </div>
+</section>
+
+<!-- COLLECTION -->
+<section id="collection" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color:var(--uv-accent)">Signature Collection</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="glass p-4 product">
+                    <img src="img/cake-1.jpg" class="img-fluid rounded mb-3" alt="">
+                    <h4>Noir Velvet</h4>
+                    <p>Dark chocolate · Madagascar vanilla</p>
+                    <strong>65 €</strong>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="glass p-4 product">
+                    <img src="img/cake-2.jpg" class="img-fluid rounded mb-3" alt="">
+                    <h4>Golden Sphere</h4>
+                    <p>Saffron · Champagne mousse</p>
+                    <strong>75 €</strong>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="glass p-4 product">
+                    <img src="img/cake-3.jpg" class="img-fluid rounded mb-3" alt="">
+                    <h4>Obsidian Rose</h4>
+                    <p>Rose · Raspberry · Black cocoa</p>
+                    <strong>80 €</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-5">
+    <div class="container glass p-5 text-center">
+        <h2 class="mb-4" style="color:var(--uv-accent)">Privátna objednávka</h2>
+        <p class="mb-4">Kontaktujte nás pre individuálnu výrobu a exkluzívne eventy</p>
+        <form id="privateOrderForm" class="row g-3">
+            <div class="col-md-6"><input class="form-control" name="user_name" placeholder="Meno" required></div>
+            <div class="col-md-6"><input class="form-control" name="user_email" type="email" placeholder="Email" required></div>
+            <div class="col-md-6"><input class="form-control" name="user_phone" type="tel" placeholder="Telefón" required></div>
+            <div class="col-md-6">
+                <select class="form-control" name="user_products" required>
+                    <option value="">Vyberte produkt</option>
+                    <option value="Noir Velvet">Noir Velvet</option>
+                    <option value="Golden Sphere">Golden Sphere</option>
+                    <option value="Obsidian Rose">Obsidian Rose</option>
+                </select>
+            </div>
+            <div class="col-12"><textarea class="form-control" name="user_message" rows="4" placeholder="Správa"></textarea></div>
+            <div class="col-12 form-check text-start">
+                <input class="form-check-input" type="checkbox" name="user_gdpr" value="Súhlasím" id="gdprCheck" required>
+                <label class="form-check-label" for="gdprCheck">Súhlasím so spracovaním osobných údajov (GDPR)</label>
+            </div>
+            <div class="col-12"><button type="submit" class="lux-btn">Odoslať dopyt</button></div>
+        </form>
+        <div id="formMessage" class="mt-3 text-success"></div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-4 text-center">
+    <p class="mb-0">© 2025 LUMIÈRA NOIR · Luxury Pâtisserie</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
+<script>
+(function(){
+    emailjs.init("uBmaCJ5QxxC0LOY1W");
+})();
+
+const form = document.getElementById('privateOrderForm');
+const formMessage = document.getElementById('formMessage');
+
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    emailjs.sendForm('service_skuvlfb', 'template_w60ists', this)
+    .then(() => {
+        formMessage.innerText = "Vaša objednávka bola odoslaná!";
+        form.reset();
+    }, (err) => {
+        formMessage.innerText = "Nastala chyba, skúste to znova.";
+        console.error(err);
+    });
+});
+</script>
+
+<script>
+const canvas=document.getElementById('galaxy'),ctx=canvas.getContext('2d');let w,h,stars=[];
+function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight}
+window.addEventListener('resize',resize);resize();
+for(let i=0;i<220;i++)stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.2,a:Math.random(),vx:(Math.random()-.5)*.05,vy:(Math.random()-.5)*.05});
+(function draw(){ctx.clearRect(0,0,w,h);stars.forEach(s=>{s.x+=s.vx;s.y+=s.vy;if(s.x<0||s.x>w)s.vx*=-1;if(s.y<0||s.y>h)s.vy*=-1;ctx.beginPath();ctx.fillStyle=`rgba(179,107,255,${s.a})`;ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill()});requestAnimationFrame(draw)})();
+</script>
+
+</body>
+</html>
